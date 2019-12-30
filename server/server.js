@@ -9,6 +9,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use(express.static('public'));
+
 app.post('/api/images/',(req,res,next) => { // Create
   const query = `INSERT INTO zagat.restaurants (id,images,name) VALUES (${req.body.id},${req.body.images},${req.body.name})`;
 
