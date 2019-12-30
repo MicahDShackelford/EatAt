@@ -1,81 +1,80 @@
-const fs          = require('fs'),
-      path        = require('path'),
-      faker       = require('faker'),
-      images      = require('./images'),
-      prompts     = require('prompts');
+const fs = require('fs');
+const path = require('path');
+const faker = require('faker');
+const prompts = require('prompts');
+const images = require('./images');
 
 const FileToAdder = {
-  "data-1" : 0,
-  "data-2" : 2500000,
-  "data-3" : 5000000,
-  "data-4" : 7500000
-}
+  'data-1': 0,
+  'data-2': 2500000,
+  'data-3': 5000000,
+  'data-4': 7500000,
+};
 
 const CreateCSV = (fileName, final) => { // Default chunk is 1mil, default numChunks is 10
   let chunkSize = 2500001;
-  const Writer = fs.createWriteStream(path.join(__dirname,`/seedData/${fileName}.csv`));
+  const Writer = fs.createWriteStream(path.join(__dirname, `/seedData/${fileName}.csv`));
   const Write = () => {
-  let ok = true;
-  do {
-    const numPhotos = Math.floor(Math.random() * (15 - 7)) + 7;
-    let photos = [];
-    for(let i = 0; i < numPhotos; i++) {
-      const photo = images[Math.floor(Math.random() * (1008 - 0)) + 0]
-      photos.push(photo);
-    }
-    chunkSize--;
-    let i = chunkSize + FileToAdder[fileName] + 1;
-
-    if(chunkSize === 0) {
-      Writer.write(`${i},"[${photos}]",${faker.lorem.word()}\n`, 'utf8');
-      if(final) {
-        let endTime = new Date().getTime();
-        let msElapse = endTime-startTime;
-        let timeElapse = new Date(msElapse).toISOString().slice(14, -1);
-        console.log(`[DataGen] Data generation complete in ${timeElapse} (mm:ss:mss)`);
+    let ok = true;
+    do {
+      const numPhotos = Math.floor(Math.random() * (15 - 7)) + 7;
+      const photos = [];
+      for (let i = 0; i < numPhotos; i++) {
+        const photo = images[Math.floor(Math.random() * (1008 - 0)) + 0];
+        photos.push(photo);
       }
-    } else {
-      ok = Writer.write(`${i},"[${photos}]",${faker.lorem.word()}\n`, 'utf8');
+      chunkSize--;
+      const i = chunkSize + FileToAdder[fileName] + 1;
+
+      if (chunkSize === 0) {
+        Writer.write(`${i},"[${photos}]",${faker.lorem.word()}\n`, 'utf8');
+        if (final) {
+          const endTime = new Date().getTime();
+          const msElapse = endTime - startTime;
+          const timeElapse = new Date(msElapse).toISOString().slice(14, -1);
+          console.log(`[DataGen] Data generation complete in ${timeElapse} (mm:ss:mss)`);
+        }
+      } else {
+        ok = Writer.write(`${i},"[${photos}]",${faker.lorem.word()}\n`, 'utf8');
+      }
+    } while (chunkSize > 0 && ok);
+    if (chunkSize > 0) {
+      Writer.once('drain', Write);
     }
-  } while (chunkSize > 0 && ok);
-  if(chunkSize > 0) {
-    Writer.once('drain', Write);
-  }
-}
+  };
 
   Write();
-}
+};
 
 let startTime;
 
 (async () => {
   const response = await prompts({
-    type:'text',
-    name:'select',
-    message:"Welcome to Micah's DataGen Script. \nOptions:\n   1. 'full' - Generates 10 million entries (data 1-4)\n   2. 'first' - Generates 5 million entries (data 1-2)\n   3. 'last' - Generates 5 million entries (data 3-4)\n"
+    type: 'text',
+    name: 'select',
+    message: "Welcome to Micah's DataGen Script. \nOptions:\n   1. 'full' - Generates 10 million entries (data 1-4)\n   2. 'first' - Generates 5 million entries (data 1-2)\n   3. 'last' - Generates 5 million entries (data 3-4)\n",
   });
-  if(response.select == 'full') {
+  if (response.select == 'full') {
     startTime = new Date().getTime();
-    console.log("[DataGen] Beginning data generation");
+    console.log('[DataGen] Beginning data generation');
     CreateCSV('data-1', false);
     CreateCSV('data-2', false);
     CreateCSV('data-3', false);
     CreateCSV('data-4', true);
   } else if (response.select == 'first') {
     startTime = new Date().getTime();
-    console.log("[DataGen] Beginning data generation");
+    console.log('[DataGen] Beginning data generation');
     CreateCSV('data-1', false);
     CreateCSV('data-2', true);
   } else if (response.select == 'last') {
     startTime = new Date().getTime();
-    console.log("[DataGen] Beginning data generation");
+    console.log('[DataGen] Beginning data generation');
     CreateCSV('data-3', false);
     CreateCSV('data-4', true);
   } else {
-    console.log("Invalid Entry: Exiting");
+    console.log('Invalid Entry: Exiting');
   }
 })();
-
 
 
 // const CreateCSV = () => {

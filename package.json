@@ -10,7 +10,7 @@
     "generateData": "node server/db/GenerateData.js",
     "test": "jest"
   },
-  "files.watcherExclude" : {
+  "files.watcherExclude": {
     "*.csv": true
   },
   "dependencies": {
@@ -47,7 +47,9 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "enzyme": "^3.10.0",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-react": "^7.17.0",
     "faker": "^4.1.0",
     "jest": "^24.9.0",
