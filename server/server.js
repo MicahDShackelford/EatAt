@@ -76,6 +76,23 @@ app.delete('/api/images/:restaurantId',(req,res,next) => { // Delete
     })
 });
 
+app.post('/stress/images/',(req,res,next) => { // Measure post throughput
+  const query = `INSERT INTO zagat.restaurants (id,images,name) VALUES (${100000000},${[]},${"test"})`;
+  client.execute(query)
+    .then(() => {
+      res.send({
+        ok: true,
+        message: 'query exec'
+      })
+    }).catch(() => {
+      res.statusCode = 400;
+      res.end();
+    }).then(() => {
+      client.execute(`DELETE FROM zagat.restaurants WHERE id = ${100000000}`);
+    })
+
+});
+
 app.listen(PORT, (err) => {
   console.log(`[Server] Running on port ${PORT}`);
 })
