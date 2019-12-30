@@ -1,3 +1,5 @@
+require('newrelic'); // Metrics
+
 const express = require('express'),
       client  = require('./db/database');
 
