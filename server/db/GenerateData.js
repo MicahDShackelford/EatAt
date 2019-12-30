@@ -12,7 +12,7 @@ const FileToAdder = {
 }
 
 const CreateCSV = (fileName, final) => { // Default chunk is 1mil, default numChunks is 10
-  chunkSize = 2500001;
+  let chunkSize = 2500001;
   const Writer = fs.createWriteStream(path.join(__dirname,`/seedData/${fileName}.csv`));
   const Write = () => {
   let ok = true;
