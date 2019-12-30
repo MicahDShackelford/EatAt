@@ -1,19 +1,18 @@
 
-const cassandra = require('cassandra-driver'),
-      authProvider = new cassandra.auth.PlainTextAuthProvider('scylla', 'PASSWORD');
+const cassandra = require('cassandra-driver');
 
 const client = new cassandra.Client({
   contactPoints: ['127.0.0.1'],
   localDataCenter: 'datacenter1',
-  keyspace: 'zagat'
+  keyspace: 'zagat',
 });
 
 client.connect()
   .then((err) => {
-    if(err) {
+    if (err) {
       console.log(err);
-    }else {
-      console.log("[Database] Connection Success");
+    } else {
+      console.log('[Database] Connection Success');
     }
   });
 
