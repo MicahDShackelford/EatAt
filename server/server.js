@@ -37,7 +37,21 @@ app.get('/api/images/:restaurantId', (req, res) => {
 
   const query = `SELECT * FROM restaurants WHERE id = ${id}`;
   client.execute(query).then((result) => {
-    res.send(result.rows[0]);
+    if (result.rows[0]) {
+      let row = result.rows[0];
+      return new Promise((resolve,reject) => {
+        // add https://cow-bucket-sdc5.s3.us-east-2.amazonaws.com/images/
+        for(var i = 0; i < row.images.length; i++) {
+          row.images[i] = `https://cow-bucket-sdc5.s3.us-east-2.amazonaws.com/images/${row.images[i]}.jpg`;
+        }
+        resolve(row);
+      }).then((result) => {
+        res.send(result);
+      })
+    } else {
+      res.statusCode = 400;
+      res.end();
+    }
   });
 });
 
