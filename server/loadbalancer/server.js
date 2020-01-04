@@ -33,7 +33,7 @@ const balancer = new loadbalancer.P2cBalancer(proxies.length);
 // })
 app.get('/', (req,res,next) => {
   let target = proxies[balancer.pick()];
-  app.use(proxy('/', { target, changeOrigin: true }));
+  proxy('/', { target, changeOrigin: true });
 })
 
 app.listen(PORT,() => {
