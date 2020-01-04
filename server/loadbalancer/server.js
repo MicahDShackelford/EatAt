@@ -1,6 +1,6 @@
 const loadbalancer = require('load-balancers');
 const express = require('express');
-const proxymid = require('http-proxy-middleware');
+const proxy = require('http-proxy-middleware');
 const httpProxy = require('http-proxy');
 
 const PORT = process.env.PORT || 3001;
