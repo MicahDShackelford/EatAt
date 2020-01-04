@@ -1,6 +1,6 @@
 const loadbalancer = require('load-balancers');
 const express = require('express');
-// const proxy = require('http-proxy-middleware');
+const proxymid = require('http-proxy-middleware');
 const httpProxy = require('http-proxy');
 
 const PORT = process.env.PORT || 3001;
@@ -24,7 +24,8 @@ app.get('/', (req,res,next) => {
     resolve(target);
   }).then((target) => {
     console.log(target);
-    httpProxy.createProxyServer({ target });
+    // httpProxy.createProxyServer({ target });
+    proxymid('/', { target })
   }).then(() => {
     res.end();
   })
