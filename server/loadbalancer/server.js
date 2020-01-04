@@ -23,9 +23,10 @@ app.get('/', (req,res,next) => {
     let target = proxies[balancer.pick()];
     resolve(target);
   }).then((target) => {
+    console.log(target);
     httpProxy.createProxyServer({ target });
   }).then(() => {
-    req.end();
+    res.end();
   })
 })
 
