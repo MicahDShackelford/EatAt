@@ -7,18 +7,18 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const proxies = [
-  '52.14.254.186:3001',
-  '52.14.200.45:3001',
-  '18.216.177.145:3001',
-  '3.14.13.184:3001',
-  '18.216.100.198:3001',
+  '172.31.23.113:3001',
+  '172.31.13.101:3001',
+  '172.31.34.65:3001',
+  '172.31.39.69:3001',
+  '172.31.35.18:3001',
 ]
 
 const balancer = new loadbalancer.P2cBalancer(proxies.length);
 
 const target = proxies[balancer.pick()];
 
-app.use('/', proxy({ target }));
+app.use(proxy('/', { target }));
 
 app.listen(PORT,() => {
   console.log('Proxy Online');

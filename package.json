@@ -8,6 +8,7 @@
     "devstart": "nodemon server/server.js",
     "build": "webpack -d --watch",
     "generateData": "node server/db/GenerateData.js",
+    "loadbal": "node server/loadbalancer/server.js",
     "test": "jest"
   },
   "files.watcherExclude": {
