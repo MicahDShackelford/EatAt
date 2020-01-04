@@ -32,8 +32,12 @@ const balancer = new loadbalancer.P2cBalancer(proxies.length);
 //   })
 // })
 app.get('/', (req,res,next) => {
-  let target = proxies[balancer.pick()];
-  proxy('/', { target });
+  return new Promise((resolve,reject) => {
+    let target = proxies[balancer.pick()];
+    proxy('/', { target });
+  }).then(() => {
+    res.end();
+  })
 })
 
 app.listen(PORT,() => {
