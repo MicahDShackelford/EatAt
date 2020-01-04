@@ -16,10 +16,12 @@ let proxies = [
 
 const balancer = new loadbalancer.P2cBalancer(proxies.length);
 
-app.all('/', () => {
+app.all('/', (req,res,next) => {
   const target = proxies[balancer.pick()];
 
   proxy('/', { target });
+
+  res.end();
 });
 
 app.listen(PORT,() => {
