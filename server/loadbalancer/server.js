@@ -24,6 +24,8 @@ app.get('/', (req,res,next) => {
     resolve(target);
   }).then((target) => {
     httpProxy.createProxyServer({ target });
+  }).then(() => {
+    req.end();
   })
 })
 
