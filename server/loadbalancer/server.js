@@ -16,11 +16,9 @@ const proxies = [
 
 const balancer = new loadbalancer.P2cBalancer(proxies.length);
 
+const target = proxies[balancer.pick()];
 
-app.all('/', () => {
-  const target = proxies[balancer.pick()];
-  proxy('/', { target })
-});
+app.use(proxy('/', { target }));
 
 app.listen(PORT,() => {
   console.log('Proxy Online');
