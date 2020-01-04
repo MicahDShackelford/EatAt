@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const proxies = [
-  '172.31.23.113',
-  '172.31.13.101',
-  '172.31.34.65',
-  '172.31.39.69',
-  '172.31.35.18',
+  '172.31.23.113:3001',
+  '172.31.13.101:3001',
+  '172.31.34.65:3001',
+  '172.31.39.69:3001',
+  '172.31.35.18:3001',
 ]
 
 const balancer = new loadbalancer.P2cBalancer(proxies.length);
