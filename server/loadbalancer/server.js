@@ -1,6 +1,7 @@
 const loadbalancer = require('load-balancers');
 const express = require('express');
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
+const httpProxy = require('http-proxy');
 
 const PORT = process.env.PORT || 3001;
 
@@ -16,9 +17,17 @@ const proxies = [
 
 const balancer = new loadbalancer.P2cBalancer(proxies.length);
 
-const target = proxies[balancer.pick()];
 
-app.use(proxy('/', { target }));
+app.get('/', (req,res,next) => {
+  return new Promise((resolve,reject) => {
+    let target = proxies[balancer.pick()];
+    resolve(target);
+  }).then((target) => {
+    httpProxy.createProxyServer({ target });
+  })
+})
+
+// app.use(proxy('/', { target, changeOrigin: true }));
 
 app.listen(PORT,() => {
   console.log('Proxy Online');
