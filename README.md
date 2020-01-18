@@ -1,13 +1,12 @@
-# Project Name
+# EatAt
 
-> Project description
+> Scaling codebase & infrastructure to support 10 million entries as opposed to the 100 that this legacy codebase could previously support. This component is the image gallary, my component and database were proxied together with two other components.
 
 ## Related Projects
+  - Original: https://github.com/SDC-Tiramisu/Service-Micah
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/SDC-Tiramisu/service-shuwei
+  - https://github.com/SDC-Tiramisu/Mentions
 
 ## Table of Contents
 
