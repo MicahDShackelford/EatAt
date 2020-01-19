@@ -2,6 +2,10 @@
 
 > Scaling codebase & infrastructure to support 10 million entries as opposed to the 100 that this legacy codebase could previously support. This component is the image gallary, my component and database were proxied together with two other components.
 
+## Photos
+![withlb](../assets/with-lb.gif?raw=true)
+![withoutlb](../assets/without-lb.gif?raw=true)
+
 ## Related Projects
   - Original: https://github.com/SDC-Tiramisu/Service-Micah
 
