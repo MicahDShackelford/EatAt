@@ -26,12 +26,12 @@ Sorry no scaled demo is available at this time due to server requirements.
 
 ## Usage
 
-> Install across multiple nodes
-> Setup database (Scylla or Cassandra)
-> Point your nodes at the database
-> Setup Nginx on a separate server
-> Point Nginx load balancer at each of the nodes
-> Your service is deployed
+1. Install across multiple nodes
+1. Setup database (Scylla or Cassandra)
+1. Point your nodes at the database
+1. Setup Nginx on a separate server
+1. Point Nginx load balancer at each of the nodes
+1. Your service is deployed
 
 ## Requirements
 
