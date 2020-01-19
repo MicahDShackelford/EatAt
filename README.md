@@ -2,6 +2,9 @@
 
 > Scaling codebase & infrastructure to support 10 million entries as opposed to the 100 that this legacy codebase could previously support. This component is the image gallary, my component and database were proxied together with two other components.
 
+## Demo
+Sorry no scaled demo is available at this time due to server requirements.
+
 ## Photos (Slideshows)
 ### With Nginx Load Balancer & 5 server cluster
 ![withlb](../assets/with-lb.gif?raw=true)
