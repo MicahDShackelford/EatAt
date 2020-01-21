@@ -27,6 +27,7 @@ Sorry no scaled demo is available at this time due to server requirements.
 
 ## Techs
 
+- AWS (EC2 & S3)
 - Node
 - Express
 - ScyllaDB (Cassandra)
