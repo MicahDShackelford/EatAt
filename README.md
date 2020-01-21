@@ -20,9 +20,20 @@ Sorry no scaled demo is available at this time due to server requirements.
 
 ## Table of Contents
 
+1. [Techs](#Techs)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
+
+## Techs
+
+- Node
+- Express
+- ScyllaDB (Cassandra)
+- Nginx
+- New Relic
+- Loader.io
+- Artillery 
 
 ## Usage
 
